@@ -11,9 +11,13 @@ const port = process.env.PORT || 3000;
 
 
 
-const template_path = path.join(__dirname,"../templates/views");
-const partials_path = path.join(__dirname,"../templates/partials");
+// public static path
+ 
+const static_path = path.join(__dirname,"./public");
+const template_path = path.join(__dirname,"./templates/views");
+const partials_path = path.join(__dirname,"./templates/partials");
 
+app.use(express.static(static_path));
 
 //view engine
 app.set('view engine','hbs');
@@ -26,7 +30,7 @@ hbs.registerPartials(partials_path);
 
 
 //by default index.html in public folder, if using html
-app.get('/', (req,res) => {
+app.get('', (req,res) => {
      res.render('index');
 });
 
