@@ -1,5 +1,6 @@
 //nodemon src/app.js
 //nodemon src/app.js -e js,hbs to reflect changes
+require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
@@ -26,8 +27,7 @@ app.set('views', template_path)
 
 hbs.registerPartials(partials_path);
 
-
-
+const key= process.env.API_KEY;
 
 //by default index.html in public folder, if using html
 app.get('', (req,res) => {
@@ -39,7 +39,7 @@ app.get('/about', (req,res) => {
 });
 
 app.get('/weather', (req,res) => {
-    res.render('weather');
+    res.render('weather' , {key:key,});
 });
 
 //this is for error page
@@ -50,3 +50,5 @@ app.get('*', (req,res) => {
 app.listen(port , () => {
     console.log(`running at port ${port}`);
 });
+
+module.exports =key;
