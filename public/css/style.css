@@ -171,7 +171,7 @@ body{
     background-color: #fff;
 }
 .tempinfo{
-    width:30rem; 
+    width:50rem; 
     margin:auto;
     min-height: 20rem;
     background-color: #323544;
@@ -226,9 +226,7 @@ body{
     font-weight: 900;
 }
 
-.fa{
-    color: #009ad8;
-}
+
 
 sup{
     font-size: 3rem;
@@ -281,8 +279,11 @@ footer p{
         width:auto;
     }
     .main_layer .inner_layer p,
-    .main_layer .inner_layer .fa {
-    font-size: 3rem;
+    .main_layer .inner_layer  {
+    font-size: 2rem;
+    }
+    .inner_layer fa{
+        font-size: 3rem;
     }
     sup{
         font-size: 2rem;

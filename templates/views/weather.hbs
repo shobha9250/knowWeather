@@ -13,8 +13,8 @@
         <div class="row">
             <div class="col-md-10 col-12 mx-auto">
                 <div class="main_content">
-                    <form class="temp_form">
-                        <input type="text" id="cityName" placeholder="Enter your city name" autocomplete="off">
+                    <form class="temp_form" action="/weather" method="POST">
+                        <input type="text" name="readcity" id="cityName" placeholder="Enter your city name" autocomplete="off">
                         <input type="submit" value="search" id="submitbtn">
                     </form>
                 </div>
@@ -24,11 +24,30 @@
                         <p id="date">23 JULY</p>
                     </div>
                     <div class="main_layer">
-                        <p id="city_name"> it will be here</p>
-                        <div class="inner_layer data_hide">
-                            <p><span id="temp">0</span><sup>o</sup>C</p>
-                            <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
-                        </div>
+                        {{#if emptyErr}}
+                            <p id="city_name"> Please write city name and then click on search</p>
+                        {{else if invalidCity}}
+                            <p id="city_name"> Please write correct spelling of city name</p>
+                        {{else if obj}}
+                            <p id="city_name"> {{obj.name}}, {{obj.sys.country}}</p>
+                            <div class="inner_layer">
+                                
+                                <p><span id="temp">min: {{obj.main.temp_min}}</span><sup>o</sup>C</p>
+                                <p><span id="temp">max: {{obj.main.temp_max}}</span><sup>o</sup>C</p>
+                                {{#ifEquals obj.weather.[0].main "Rain" }}
+                                    <p id="temp_status"><i style="color:rgb(99, 129, 228);" class="fa fa-cloud-rain"></i></p>
+                                {{else ifEquals obj.weather.[0].main "Clear"}}
+                                    <p id="temp_status"><i style="color:rgb(253, 249, 10);" class="fa fa-sun"></i></span></p>
+                                {{else ifEquals obj.weather.[0].main "Clouds"}}
+                                    <p id="temp_status"><i style="color:rgb(226, 222, 222);" class="fa fa-clouds"></i></span></p>
+                                {{else}}
+                                    <p id="temp_status"><i style="color:rgb(226, 222, 222);" class="fa fa-sun"></i></span></p>
+                                {{/ifEquals}}
+                                
+                            </div>
+                        {{else}}
+                            <p id="city_name"> Output will be displayed here.</p>
+                        {{/if}}
                     </div>
                 </div>
             </div>
@@ -37,6 +56,7 @@
 
     {{>footer}}
 
+    
     <script src="/js/main.js"></script>
 </body>
 </html>
